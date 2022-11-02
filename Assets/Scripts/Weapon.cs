@@ -9,6 +9,7 @@ public class Weapon : MonoBehaviour
     public Text BulletAmountText;
     public int BulletAmountValue = 9;
     private Animator animator;
+    public PlayerStats playerStats;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class Weapon : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && BulletAmountValue > 0)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
         }
@@ -26,10 +27,10 @@ public class Weapon : MonoBehaviour
 
     private void Shoot()
     {
-        if(BulletAmountValue > 0)
+        if(playerStats.ammo > 0)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
-            BulletAmountValue--;
+            playerStats.UseAmmo();
             //BulletAmountText.text = BulletAmountValue.ToString();
         }  
     }

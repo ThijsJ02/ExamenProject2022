@@ -8,7 +8,6 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    private BoxCollider2D boxCollider2D;
 
     public float jumpHeight;
     public float speed;
@@ -20,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask slopeLayer;
     public Transform groundcheck;
 
-    private float jumpForce;
     private bool isGrounded = true;
     public float rayLenght = .5f;
 
@@ -29,8 +27,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        animator = GetComponent<Animator>();    
-        boxCollider2D = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -38,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
         HandleInput();
         Flip();
         HandleAnimations();
-        HandleSlopes();
     }
 
     private void FixedUpdate()
@@ -86,32 +82,6 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(leftRaycastOriginPoint.position, Vector2.down * rayLenght);
         Debug.DrawRay(rightRaycastOriginPoint.position, Vector2.down * rayLenght);
         return isGrounded;
-    }
-
-    private void HandleSlopes()
-    {
-        RaycastHit2D raycastHitLeft = Physics2D.Raycast(leftRaycastOriginPoint.position, Vector2.down, rayLenght, slopeLayer);
-        RaycastHit2D raycastHitRight = Physics2D.Raycast(rightRaycastOriginPoint.position, Vector2.down, rayLenght, slopeLayer);
-        Color rayColor = Color.white;
-
-        if (raycastHitLeft.collider != null || raycastHitRight.collider != null)
-        {
-            //Hit a slope
-            rayColor = Color.blue;
-        }
-        else if (raycastHitLeft.collider == null && raycastHitRight.collider == null)
-        {
-            //Not hitting slope
-            rayColor = Color.yellow;
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
-        }
-        Debug.DrawRay(leftRaycastOriginPoint.position, Vector2.down * rayLenght, rayColor);
-        Debug.DrawRay(rightRaycastOriginPoint.position, Vector2.down * rayLenght, rayColor);
-    }
-
-    private bool IsFalling()
-    {
-        return !IsGrounded();
     }
 
     private void Flip()
