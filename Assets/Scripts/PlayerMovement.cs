@@ -128,5 +128,10 @@ public class PlayerMovement : MonoBehaviour
                 animator.SetBool("Jump", true);
             }
         }
+
+        if(rb.velocity.y < -2.5f && !IsGrounded())
+        {
+            animator.SetBool("Jump", true);
+        }
     }
 }

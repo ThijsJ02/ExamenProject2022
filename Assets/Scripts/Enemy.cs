@@ -160,6 +160,7 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        playerStats.killedEnemies++;
         Instantiate(deathEffect, transform.position, transform.rotation);
         Destroy(this.gameObject);
     }
