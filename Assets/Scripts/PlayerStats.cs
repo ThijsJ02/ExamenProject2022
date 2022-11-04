@@ -25,12 +25,28 @@ public class PlayerStats : MonoBehaviour
 
     public float levelTimeLeft;
     public TextMeshProUGUI remainingLevelTime;
+    private bool stopCounting = false;
 
+    private static int lives = 3;
+    public static int Lives
+    {
+        get { return lives; }
+
+        set
+        {
+            lives = value;
+
+            if(lives == 0)
+            {
+                Debug.Log("Player is out of lives! Player has to start from the beginning of the game");
+            }
+        }
+    }
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        levelTimeLeft = 300;
+        levelTimeLeft = 5;
     }
 
     private void Update()
@@ -50,15 +66,19 @@ public class PlayerStats : MonoBehaviour
             }
         }
 
-        if(levelTimeLeft > 0)
+        if (!stopCounting)
         {
-            levelTimeLeft -= Time.deltaTime;
-            remainingLevelTime.text = Mathf.RoundToInt(levelTimeLeft).ToString(); 
-        }
-        else
-        {
-            levelTimeLeft = 0;
-            TimeIsUp();   
+            if (levelTimeLeft > 0)
+            {
+                levelTimeLeft -= Time.deltaTime;
+                remainingLevelTime.text = Mathf.RoundToInt(levelTimeLeft).ToString();
+            }
+            else if (levelTimeLeft <= 0)
+            {
+                levelTimeLeft = 0;
+                TimeIsUp();
+                stopCounting = true;
+            }
         }
     }
 
@@ -66,10 +86,17 @@ public class PlayerStats : MonoBehaviour
     {
         if (!isInPowerUp)
         {
-            health = health - amount;
-            healthSlider.value = health;
-            healthValueText.text = health.ToString();
-            animator.SetTrigger("Hurt");
+            if(health > 0)
+            {
+                health = health - amount;
+                healthSlider.value = health;
+                healthValueText.text = health.ToString();
+                animator.SetTrigger("Hurt");
+            }
+            else
+            {
+                Die();
+            }
         }
         
     }
@@ -77,6 +104,8 @@ public class PlayerStats : MonoBehaviour
     private void TimeIsUp()
     {
         Debug.Log("Time is up!");
+        Lives--;
+        Debug.Log(lives);
         //LevelLoader.RestartLevel
     }
 
@@ -99,5 +128,11 @@ public class PlayerStats : MonoBehaviour
         PowerUpSlider.gameObject.SetActive(true);
         timeLeft = 10f;
         isInPowerUp = true;
+    }
+
+    private void Die()
+    {
+        Lives--;
+        //LevelLoader.RestartLevel
     }
 }
