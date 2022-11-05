@@ -10,43 +10,40 @@ public class PlayerStats : MonoBehaviour
     public float ammo;
     public int killedEnemies;
 
+    [Header("Level Loader")]
+    public LevelLoader levelLoader;
+
     private Animator animator;
 
+    [Header("Health Bar Components")]
     public Slider healthSlider;
     public TextMeshProUGUI healthValueText;
 
+    [Header("Ammo Bar Components")]
     public Slider ammoSlider;
     public TextMeshProUGUI ammoValueText;
 
     private bool isInPowerUp = false;
 
-    public float timeLeft;
+    [Header("Power-Up Bar")]
     public Slider PowerUpSlider;
+    public float timeLeft;
 
+    [Header("Level Time")]
     public float levelTimeLeft;
     public TextMeshProUGUI remainingLevelTime;
     private bool stopCounting = false;
 
-    private static int lives = 3;
-    public static int Lives
-    {
-        get { return lives; }
-
-        set
-        {
-            lives = value;
-
-            if(lives == 0)
-            {
-                Debug.Log("Player is out of lives! Player has to start from the beginning of the game");
-            }
-        }
-    }
+    [Header("Lives")]
+    public TextMeshProUGUI remainingLivesText;
+    public static int lives = 3;
 
     private void Start()
     {
         animator = GetComponent<Animator>();
-        levelTimeLeft = 5;
+        levelTimeLeft = 240;
+
+        remainingLivesText.text = lives.ToString();
     }
 
     private void Update()
@@ -80,13 +77,19 @@ public class PlayerStats : MonoBehaviour
                 stopCounting = true;
             }
         }
+
+        if(lives <= 0)
+        {
+            lives = 3;
+            levelLoader.LoadMainMenu();
+        }
     }
 
     public void TakeDamage(float amount)
     {
         if (!isInPowerUp)
         {
-            if(health > 0)
+            if(health > 1)
             {
                 health = health - amount;
                 healthSlider.value = health;
@@ -103,10 +106,8 @@ public class PlayerStats : MonoBehaviour
 
     private void TimeIsUp()
     {
-        Debug.Log("Time is up!");
-        Lives--;
-        Debug.Log(lives);
-        //LevelLoader.RestartLevel
+        lives--;
+        levelLoader.ReloadLevel();
     }
 
     public void UseAmmo()
@@ -132,7 +133,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Die()
     {
-        Lives--;
-        //LevelLoader.RestartLevel
+        lives--;
+        levelLoader.ReloadLevel();
     }
 }

@@ -2,26 +2,24 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float horizontal;
-    private bool jump = false;
-    public bool isRunning = false;
-
     private Rigidbody2D rb;
     private Animator animator;
 
+    [Header("Player Attributes")]
     public float jumpHeight;
     public float speed;
 
+    [Header("Raycast Attributes & Components")]
     public Transform leftRaycastOriginPoint;
     public Transform rightRaycastOriginPoint;
+    public float rayLenght = 0.5f;
 
+    [Header("Ground Layers")]
     public LayerMask groundLayer;
-    public LayerMask slopeLayer;
-    public Transform groundcheck;
 
+    private bool jump = false;
+    private float horizontal;
     private bool isGrounded = true;
-    public float rayLenght = .5f;
-
     private bool isFacingRight = true;
 
     private void Start()
@@ -99,14 +97,6 @@ public class PlayerMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         animator.SetInteger("Run", (int)Mathf.Abs(horizontal));
 
-        if((int)Mathf.Abs(horizontal) != 0)
-        {
-            isRunning = true;
-        }
-        else
-        {
-            isRunning = false;
-        }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {

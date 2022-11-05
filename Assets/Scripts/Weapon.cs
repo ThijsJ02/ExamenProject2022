@@ -3,25 +3,37 @@ using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Shooting Related Components")]
     public Transform firePoint;
-    private PlayerMovement player;
     public GameObject bulletPrefab;
-    public Text BulletAmountText;
-    public int BulletAmountValue = 9;
+    
+    private PlayerStats playerStats;
     private Animator animator;
-    public PlayerStats playerStats;
-
+    private PlayerMovement player;
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
         player = GetComponentInParent<PlayerMovement>();
+        playerStats = GetComponent<PlayerStats>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            if(playerStats.ammo > 0)
+            {
+                animator.SetBool("Shoot", true);
+            }
             Shoot();
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            if(animator.GetBool("Shoot") == true)
+            {
+                animator.SetBool("Shoot", false);
+            }
         }
     }
 
@@ -31,7 +43,6 @@ public class Weapon : MonoBehaviour
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
             playerStats.UseAmmo();
-            //BulletAmountText.text = BulletAmountValue.ToString();
         }  
     }
 }
