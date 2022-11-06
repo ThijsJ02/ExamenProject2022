@@ -38,6 +38,9 @@ public class PlayerStats : MonoBehaviour
     public TextMeshProUGUI remainingLivesText;
     public static int lives = 3;
 
+    [Header("Not Killed All Enemies")]
+    public GameObject killMoreEnemiesMessage;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -131,9 +134,18 @@ public class PlayerStats : MonoBehaviour
         isInPowerUp = true;
     }
 
-    private void Die()
+    public void Die()
     {
         lives--;
         levelLoader.ReloadLevel();
+    }
+
+    public IEnumerator WarnPlayer()
+    {
+        killMoreEnemiesMessage.SetActive(true);
+
+        yield return new WaitForSeconds(4);
+
+        killMoreEnemiesMessage.SetActive(false);
     }
 }
