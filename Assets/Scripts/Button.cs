@@ -24,6 +24,11 @@ public class Button : MonoBehaviour
         }          
     }
 
+    public void LoadMainMenu()
+    {
+        levelLoader.LoadMainMenu();
+    }
+
     IEnumerator ShowGuideMessage()
     {
         notReadGuideMessage.SetActive(true);

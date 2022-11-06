@@ -17,13 +17,13 @@ public class CameraFollow : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if(cam.orthographicSize == 5)
+            if(cam.orthographicSize == 8)
             {
-                cam.orthographicSize = 10;
+                cam.orthographicSize = 12;
             }
-            else if(cam.orthographicSize == 10)
+            else if(cam.orthographicSize == 12)
             {
-                cam.orthographicSize = 5;
+                cam.orthographicSize = 8;
             }
         }
     }
