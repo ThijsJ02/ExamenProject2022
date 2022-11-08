@@ -10,6 +10,10 @@ public class Weapon : MonoBehaviour
     private PlayerStats playerStats;
     private Animator animator;
     private PlayerMovement player;
+
+    public AudioClip shootSound;
+    public AudioSource source;
+
     private void Start()
     {
         animator = GetComponentInParent<Animator>();
@@ -42,6 +46,7 @@ public class Weapon : MonoBehaviour
         if(playerStats.ammo > 0)
         {
             Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+            source.PlayOneShot(shootSound);
             playerStats.UseAmmo();
         }  
     }

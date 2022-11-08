@@ -7,10 +7,11 @@ public class Button : MonoBehaviour
     public LevelLoader levelLoader;
 
     public GameObject mainMenuObject;
+    public GameObject pauseMenu;
     public GameObject guidemenuObject;
     public GameObject notReadGuideMessage;
 
-    private bool hasReadGuide = false;
+    private static bool hasReadGuide = false;
 
     public void StartGame()
     {
@@ -22,6 +23,12 @@ public class Button : MonoBehaviour
         {
             levelLoader.LoadLevel(1);
         }          
+    }
+
+    public void ContinueGame()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void LoadMainMenu()

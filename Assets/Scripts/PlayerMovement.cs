@@ -22,6 +22,9 @@ public class PlayerMovement : MonoBehaviour
     private bool isGrounded = true;
     private bool isFacingRight = true;
 
+    public AudioSource source;
+    public AudioClip footstepSound;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -123,5 +126,10 @@ public class PlayerMovement : MonoBehaviour
         {
             animator.SetBool("Jump", true);
         }
+    }
+
+    public void PlayFootstepSound()
+    {
+        source.PlayOneShot(footstepSound);
     }
 }

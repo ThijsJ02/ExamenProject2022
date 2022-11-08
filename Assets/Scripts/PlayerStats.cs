@@ -41,6 +41,8 @@ public class PlayerStats : MonoBehaviour
     [Header("Not Killed All Enemies")]
     public GameObject killMoreEnemiesMessage;
 
+    public GameObject pauseMenu;
+
     private void Start()
     {
         animator = GetComponent<Animator>();
@@ -85,6 +87,12 @@ public class PlayerStats : MonoBehaviour
         {
             lives = 3;
             levelLoader.LoadMainMenu();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu.activeSelf == false)
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
         }
     }
 
