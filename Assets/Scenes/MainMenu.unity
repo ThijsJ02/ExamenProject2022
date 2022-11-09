@@ -3533,7 +3533,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37750003, y: 0.2722033}
   m_AnchorMax: {x: 0.37750003, y: 0.2722033}
-  m_AnchoredPosition: {x: 0.0000076293945, y: -1.5999908}
+  m_AnchoredPosition: {x: 0, y: -1.5999908}
   m_SizeDelta: {x: 83.7075, y: 16.9157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &667227824
@@ -6531,9 +6531,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: Versla in elk level alle vijanden binnen de tijd. Als je alle vijanden
     hebt verslagen kan je door naar het volgende level. Na 3 levels is het spel afgelopen
-    en heb je het spel uitgespeeld. Je krijgt kogels door kogelmunten op te pakken(Blauwe
-    muntjes). Kom niet de dicht in de buurt van de vijanden! Dan zullen zij jou aavallen.
-    Als je een power-up gebruikt wordt je onstervelijk.
+    en heb je het spel uitgespeeld. Je krijgt kogels door kogelmunten op te pakken(Oranje
+    muntjes). Kom niet te dicht in de buurt van de vijanden! Dan zullen zij jou aavallen.
+    Als je een power-up gebruikt wordt je onsterfelijk.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -7644,7 +7644,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.37750003, y: 0.5}
   m_AnchorMax: {x: 0.37750003, y: 0.5}
-  m_AnchoredPosition: {x: 0.6999893, y: 0.03199768}
+  m_AnchoredPosition: {x: 0.6999817, y: 0.03199768}
   m_SizeDelta: {x: 83.7075, y: 16.9157}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1610405173

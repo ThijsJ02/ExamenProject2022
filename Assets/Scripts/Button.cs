@@ -17,6 +17,7 @@ public class Button : MonoBehaviour
     {
         if (!hasReadGuide)
         {
+            hasReadGuide = true;
             StartCoroutine(ShowGuideMessage());
         }
         else
